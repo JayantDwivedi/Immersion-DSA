@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class CoinCount {
     public static void main(String[] args) {
         int[] currency = {1,2,5,10,20,50,100,200,500,2000};
-        int amount = 39;
+        int amount = 25;
 
 
         int count = 0;
@@ -13,11 +13,15 @@ public class CoinCount {
         while (amount > 0) {
             int index = Arrays.binarySearch(currency,amount);
 
-            if (index < 0) {
-                index = Math.abs(index) - 2;
+            if (index > 0 ) {
+                count++;
+                amount -= currency[index];
             }
-            amount -= currency[index];
-            count++;
+            else {
+                int lowerbound = Math.abs(index) - 2;
+                count++;
+                amount -= currency[lowerbound];
+            }
         }
         System.out.println(count);
     }
